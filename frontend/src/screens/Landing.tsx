@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import { Button } from "../components/Button";
 
 export const Landing = () => {
+    // redirect user
     const navigate = useNavigate();
     return (
       <div className="h-screen bg-black flex items-center justify-center">
@@ -32,12 +34,11 @@ export const Landing = () => {
             </p>
   
             {/* Call-to-action Button */}
-            <button 
-              onClick={() => navigate("/game")}
-              className="px-10 py-4 bg-purple-600 hover:bg-purple-500 transition duration-300 rounded-full text-lg md:text-xl font-semibold shadow-lg transform hover:scale-105"
-            >
+            <Button onClick={() => {
+              navigate("/game")
+            }}>
               Play Online
-            </button>
+            </Button>
           </div>
         </div>
       </div>
