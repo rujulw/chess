@@ -9,3 +9,5 @@ wss.on('connection', function connection(ws) {
     gameManager.addUser(ws);
     ws.on('disconnect', () => gameManager.removeUser(ws))
 });
+
+console.log('WebSocket server is running on ws://localhost:8080');

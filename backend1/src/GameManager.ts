@@ -1,5 +1,7 @@
 import { WebSocket } from "ws";
 import { Game } from "./Game";
+import { INIT_GAME, MOVE, GAME_OVER } from "./messages";
+
 
 //User and Game class
 
