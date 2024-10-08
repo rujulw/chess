@@ -11,8 +11,14 @@ export const ChessBoard = ({ board }: {
     {board.map((row, i) => {
         return <div key={i} className="flex">
             {row.map((square, j) => {
-                return <div key={j} className={`w-8 h-8 ${(i+j)%2 === 0 ? 'bg-green500' : 'bg-green-300'}`}>
-                    {square ? square.type : ""}
+                return <div key={j} className={`w-16 h-16 ${(i+j)%2 === 0 ? 'bg-purple-500' : 'bg-white'}`}>
+                    <div className="w-full justify-center flex h-full">
+                        <div className="h=full justify-center flex flex-col">
+                        {square ? square.type : ""}
+                        </div>
+                    
+                    </div>
+                    
                 </div>
             })}
         </div>

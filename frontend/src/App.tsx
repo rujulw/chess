@@ -8,14 +8,14 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
+    <div className='bg-black'>
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/game" element={<Game />} />
       </Routes>
     </BrowserRouter>
-    </>
+    </div>
   )
 }
 
