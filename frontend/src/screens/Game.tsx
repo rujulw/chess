@@ -22,7 +22,6 @@ export const Game = () => {
 
             switch(message.type) {
                 case INIT_GAME:
-                    setChess(new Chess());
                     setBoard(chess.board());
                     console.log("Game initialized");
                     break;
@@ -47,7 +46,7 @@ export const Game = () => {
             <div className="grid grid-cols-6 gap-4 
             w-full">
                 <div className="col-span-4 w-full flex justify-center">
-                    <ChessBoard board={board}/>
+                    <ChessBoard chess = {chess} setBoard= {setBoard} socket={socket}board={board}/>
                 </div>
                 <div className="col-span-2 w-full flex w-full justify-center">
                     <div className="pt-20">
