@@ -45,10 +45,11 @@ export const ChessBoard = ({ chess, board, socket, setBoard }: {
                                             }
                                         }}
                                         key={j}
-                                        className={`w-20 h-20 ${(i + j) % 2 === 0 ? 'bg-purple-500' : 'bg-white'} flex items-center justify-center cursor-pointer`}
-                                    >
+                                        className={`w-20 h-20 ${(i + j) % 2 === 0 ? 'bg-purple-500' : 'bg-white'} flex items-center justify-center cursor-pointer`}>
                                         <div className="text-3xl">
-                                            {square ? square.type.toUpperCase() : ""}
+                                            {square ? <img className="-4" src={`/${square?.color === "b" ? 
+                                            square?.type : `${square?.type?.toUpperCase()} copy`}.png`} /> :
+                                            null}
                                         </div>
                                     </div>
                                 );
