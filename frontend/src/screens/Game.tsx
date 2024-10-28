@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button } from "../components/Button"
-import { ChessBoard } from "../components/ChessBoard"
-import { useSocket } from "../hooks/useSocket"
+import { ChessBoard } from "../components/ChessBoard";
+import { GameMenu } from "../components/GameMenu"; // Import the new GameMenu
+import { useSocket } from "../hooks/useSocket";
 import { Chess } from "chess.js";
 
 const INIT_GAME = "init_game";
@@ -14,13 +14,13 @@ export const Game = () => {
     const [board, setBoard] = useState(chess.board());
 
     useEffect(() => {
-        if(!socket) {
+        if (!socket) {
             return;
         }
-        socket.onmessage = (event) =>{
+        socket.onmessage = (event) => {
             const message = JSON.parse(event.data);
 
-            switch(message.type) {
+            switch (message.type) {
                 case INIT_GAME:
                     setBoard(chess.board());
                     console.log("Game initialized");
@@ -35,31 +35,36 @@ export const Game = () => {
                     console.log("Game over");
                     break;
             }
-        }
+        };
     }, [socket]);
 
+    if (!socket) return <div>Connecting...</div>;
 
-    if(!socket) return <div>Connecting...</div>
+    const handlePlay = () => {
+        socket.send(JSON.stringify({
+            type: INIT_GAME
+        }));
+    };
 
-    return <div className="justify-center flex">
-        <div className="pt-8 max-w-screen-lg w-full">
-            <div className="grid grid-cols-6 gap-4 
-            w-full">
-                <div className="col-span-4 w-full flex justify-center">
-                    <ChessBoard chess = {chess} setBoard= {setBoard} socket={socket}board={board}/>
-                </div>
-                <div className="col-span-2 w-full flex w-full justify-center">
-                    <div className="pt-20">
-                        <Button onClick={() => {
-                            socket.send(JSON.stringify({
-                            type: INIT_GAME
-                            }))
-                        }}>
-                            Play
-                        </Button>
+    return (
+        <div className="justify-center flex">
+            <div className="pt-8 max-w-screen-lg w-full">
+                <div className="grid grid-cols-6 gap-4 w-full">
+                    {/* Chessboard Section */}
+                    <div className="col-span-4 w-full flex justify-center">
+                        <ChessBoard chess={chess} setBoard={setBoard} socket={socket} board={board} />
+                    </div>
+
+                    {/* Right Section with Game Menu */}
+                    <div className="col-span-2 w-full flex flex-col items-center justify-center">
+                        <GameMenu 
+                            title="PLAY CHESS" 
+                            subtitle="" 
+                            onPlay={handlePlay} 
+                        />
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+    );
+};
